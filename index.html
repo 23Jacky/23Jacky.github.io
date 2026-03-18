@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人项目作品集 - 结构工程师</title>
+    <style>
+        /* 全局样式：简洁专业的工程师风格 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        /* 头部样式 */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #007acc;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            color: #007acc;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        /* 项目卡片样式 */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 25px;
+            transition: transform 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .project-card h2 {
+            color: #007acc;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            border-left: 4px solid #007acc;
+            padding-left: 10px;
+        }
+        .project-card .period {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .project-card .content {
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        .project-card .content p {
+            margin-bottom: 8px;
+        }
+        /* 媒体展示区 */
+        .media-section {
+            margin-top: 20px;
+            border-top: 1px dashed #eee;
+            padding-top: 20px;
+        }
+        .media-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .media-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .media-item {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .media-item img, .media-item video {
+            width: 100%;
+            height: auto;
+            border: 1px solid #eee;
+        }
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .projects {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部信息 -->
+        <header>
+            <h1>结构工程师 - 项目作品集</h1>
+            <p>专注半导体设备/3D打印机配件结构设计 | 精度把控 | 量产落地</p >
+        </header>
+
+        <!-- 项目列表 -->
+        <div class="projects">
+            <!-- 项目1：全自动开盖机 -->
+            <div class="project-card">
+                <h2>全自动开盖机（VSS-350A）</h2>
+                <span class="period">2026.01-2026.03 | 结构工程师</span>
+                <div class="content">
+                    <p><strong>项目概述：</strong>专为半导体激光器件设计的紧凑型数控开盖加工设备（精度0.01），适用于金属、塑料等材料的平面铣削工序，采用高精度传动系统与智能控制系统，应用于半导体激光器返修开盖分析等场景。</p >
+                    <p><strong>主要负责：</strong>根据客户需求设计精度+自动化结构方案（兼容多款产品）；3D建模结构模拟、2D工程图出包、标准件选型、BOM归档；指导装配及调试。</p >
+                    <p><strong>业绩：</strong>方案获甲方认可，项目落地并小批量生产。</p >
+                </div>
+                <!-- 媒体展示区：替换成你的图片/视频路径 -->
+                <div class="media-section">
+                    <h3>项目资料</h3>
+                    <div class="media-container">
+                        <div class="media-item">
+                            < img src="images/vss-350a-1.jpg" alt="全自动开盖机设计图">
+                        </div>
+                        <div class="media-item">
+                            <video controls src="videos/vss-350a-test.mp4">你的浏览器不支持视频播放</video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 项目2：自动平行封焊设备 -->
+            <div class="project-card">
+                <h2>自动平行封焊设备</h2>
+                <span class="period">2024.01-2024.07 | 机械工程师</span>
+                <div class="content">
+                    <p><strong>主要负责：</strong>设备的3D结构设计及2D加工图输出；设备样机调试和组装指导。</p >
+                    <p><strong>业绩：</strong>设备研发进展顺利，高质高效投产，按时按量交付；售后问题趋近于零，交付即用无需二次调试。</p >
+                </div>
+                <div class="media-section">
+                    <h3>项目资料</h3>
+                    <div class="media-container">
+                        <div class="media-item">
+                            < img src="images/sealing-machine.jpg" alt="自动平行封焊设备样机">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 项目3：拓竹/创想系列3D打印机配件开发 -->
+            <div class="project-card">
+                <h2>拓竹/创想系列3D打印机配件开发</h2>
+                <span class="period">2022.02-2023.07 | 结构工程师</span>
+                <div class="content">
+                    <p><strong>主要负责：</strong>拓竹、创想主流机型适配配件研发与升级，完成全流程结构设计、图纸发放、样品验证及量产导入。</p >
+                    <p><strong>业绩：</strong>完成20+款专用配件开发，全部顺利量产销售，适配精度高，持续供应市场与售后替换。</p >
+                </div>
+                <div class="media-section">
+                    <h3>项目资料</h3>
+                    <div class="media-container">
+                        <div class="media-item">
+                            < img src="images/3d-printer-parts.jpg" alt="3D打印机配件设计图">
+                        </div>
+                        <div class="media-item">
+                            <video controls src="videos/parts-test.mp4">你的浏览器不支持视频播放</video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 其他项目可按此格式补充，我已精简核心项目，你可自行添加剩余项目 -->
+            <div class="project-card">
+                <h2>模块老化设备/半导体芯片COS老化设备</h2>
+                <span class="period">2023.07-2025.07 | 机械/结构工程师</span>
+                <div class="content">
+                    <p><strong>核心负责：</strong>半导体老化/测试设备结构设计、夹具方案、整机布局、3D建模/2D出图、样机调试；兼容多款产品，实现温度/水流量控制。</p >
+                    <p><strong>业绩：</strong>设备批量投产无售后，交付即用，研发效率高。</p >
+                </div>
+                <div class="media-section">
+                    <h3>项目资料</h3>
+                    <div class="media-container">
+                        <div class="media-item">
+                            < img src="images/aging-equipment.jpg" alt="半导体老化设备">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
