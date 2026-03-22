@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人项目作品集 - 结构工程师</title>
+    <title>项目作品集</title>
     <style>
-        /* 全局样式：简洁专业的工程师风格 */
+        /* 全局样式 */
         * {
             margin: 0;
             padding: 0;
@@ -18,7 +18,7 @@
             line-height: 1.6;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 40px 20px;
         }
@@ -38,11 +38,11 @@
             font-size: 1.1rem;
             color: #666;
         }
-        /* 项目卡片样式 */
+        /* 项目卡片 - 四列并排布局 */
         .projects {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
         }
         .project-card {
             background: white;
@@ -50,16 +50,22 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             padding: 25px;
             transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         .project-card:hover {
             transform: translateY(-5px);
         }
         .project-card h2 {
             color: #007acc;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-bottom: 10px;
             border-left: 4px solid #007acc;
             padding-left: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .project-card .period {
             color: #888;
@@ -69,44 +75,137 @@
         }
         .project-card .content {
             margin-bottom: 20px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            flex-grow: 1;
         }
         .project-card .content p {
             margin-bottom: 8px;
         }
-        /* 媒体展示区 */
-        .media-section {
-            margin-top: 20px;
-            border-top: 1px dashed #eee;
-            padding-top: 20px;
-        }
-        .media-section h3 {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            color: #555;
-        }
-        .media-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .media-item {
+        /* 轮播图核心样式 */
+        .carousel {
+            position: relative;
             width: 100%;
-            max-width: 300px;
-            border-radius: 4px;
+            height: 240px;
             overflow: hidden;
-        }
-        .media-item img {
-            width: 100%;
-            height: auto;
+            border-radius: 4px;
+            margin-top: auto;
             border: 1px solid #eee;
-            cursor: pointer;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+        .carousel-item {
+            min-width: 100%;
+            height: 100%;
+        }
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: zoom-in;
             transition: transform 0.2s ease;
         }
-        .media-item img:hover {
+        .carousel-item img:hover {
             transform: scale(1.03);
         }
-        /* 响应式适配：手机端单列显示 */
+        /* 轮播控制按钮 */
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.4);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .carousel:hover .carousel-prev, .carousel:hover .carousel-next {
+            opacity: 1;
+        }
+        .carousel-prev {
+            left: 10px;
+        }
+        .carousel-next {
+            right: 10px;
+        }
+        .carousel-prev:hover, .carousel-next:hover {
+            background: rgba(0,0,0,0.6);
+        }
+        /* 轮播指示器 */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 5;
+        }
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .indicator.active {
+            background: #007acc;
+            width: 20px;
+            border-radius: 4px;
+        }
+        /* 图片放大模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal img {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .modal-close:hover {
+            color: #007acc;
+        }
+        /* 响应式适配：全设备兼容 */
+        @media (max-width: 1400px) {
+            .projects {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .carousel {
+                height: 280px;
+            }
+        }
         @media (max-width: 768px) {
             .projects {
                 grid-template-columns: 1fr;
@@ -114,141 +213,317 @@
             header h1 {
                 font-size: 2rem;
             }
-            .media-item {
-                max-width: 100%;
+            .carousel {
+                height: 300px;
+            }
+            .project-card h2 {
+                white-space: normal;
+                overflow: visible;
+                text-overflow: unset;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 头部信息 -->
+        <!-- 头部：仅保留项目作品集标题 -->
         <header>
-            <h1>结构工程师 - 项目作品集</h1>
+            <h1>项目作品集</h1>
             <p>专注半导体设备/3D打印机配件结构设计 | 精度把控 | 量产落地</p>
         </header>
 
-        <!-- 项目列表 -->
+        <!-- 项目列表：四列并排 -->
         <div class="projects">
-            <!-- 项目1：全自动开盖机（VSS-350A） -->
+            <!-- 项目1：全自动开盖机（VSS-350A）- 1张图 -->
             <div class="project-card">
                 <h2>全自动开盖机（VSS-350A）</h2>
                 <span class="period">2026.01-2026.03 | 结构工程师</span>
                 <div class="content">
-                    <p><strong>项目概述：</strong>专为半导体激光器件设计的紧凑型数控开盖加工设备（精度0.01），适用于金属、塑料等材料的平面铣削工序，采用高精度传动系统与智能控制系统，应用于半导体激光器返修开盖分析等场景。</p>
-                    <p><strong>主要负责：</strong>根据客户需求设计精度+自动化结构方案（兼容多款产品）；3D建模结构模拟、2D工程图出包、标准件选型、BOM归档；指导装配及调试。</p>
+                    <p><strong>项目概述：</strong>专为半导体激光器件设计的紧凑型数控开盖加工设备（精度0.01），适用于金属、塑料等材料的平面铣削工序，采用高精度传动与智能控制系统，应用于半导体激光器返修开盖分析。</p>
+                    <p><strong>主要负责：</strong>设计精度+自动化结构方案（兼容多款产品）；3D建模、2D工程图、标准件选型、BOM归档；指导装配及调试。</p>
                     <p><strong>业绩：</strong>方案获甲方认可，项目落地并小批量生产。</p>
                 </div>
-                <!-- 媒体展示区：开盖机图片 -->
-                <div class="media-section">
-                    <h3>项目资料</h3>
-                    <div class="media-container">
-                        <div class="media-item">
-                            <img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/%E5%BC%80%E7%9B%96%E6%9C%BA.png?raw=true" alt="全自动开盖机设计图">
+                <div class="carousel" id="carousel1">
+                    <div class="carousel-inner">
+                        <div class="carousel-item">
+                            <img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/%E5%BC%80%E7%9B%96%E6%9C%BA.png?raw=true" alt="全自动开盖机设计图" onclick="openModal(this.src)">
                         </div>
+                    </div>
+                    <button class="carousel-prev" onclick="prevSlide(1)">&#10094;</button>
+                    <button class="carousel-next" onclick="nextSlide(1)">&#10095;</button>
+                    <div class="carousel-indicators">
+                        <span class="indicator active" onclick="currentSlide(1, 0)"></span>
                     </div>
                 </div>
             </div>
 
-            <!-- 项目2：自动平行封焊设备 -->
+            <!-- 项目2：自动平行封焊设备 - 5张图 -->
             <div class="project-card">
                 <h2>自动平行封焊设备</h2>
                 <span class="period">2024.01-2024.07 | 机械工程师</span>
                 <div class="content">
-                    <p><strong>主要负责：</strong>设备的3D结构设计及2D加工图输出；设备样机调试和组装指导。</p>
-                    <p><strong>业绩：</strong>设备研发进展顺利，高质高效投产，按时按量交付；售后问题趋近于零，交付即用无需二次调试。</p>
+                    <p><strong>主要负责：</strong>设备3D结构设计及2D加工图输出；设备样机调试和组装指导，全程跟进生产落地。</p>
+                    <p><strong>业绩：</strong>设备高质高效投产，按时按量交付；售后问题趋近于零，实现交付即用无需二次调试。</p>
                 </div>
-                <!-- 媒体展示区：封焊设备图片（5张） -->
-                <div class="media-section">
-                    <h3>项目资料</h3>
-                    <div class="media-container">
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/12.png?raw=true" alt="自动平行封焊设备结构图1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/13.png?raw=true" alt="自动平行封焊设备结构图2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/14.jpg?raw=true" alt="自动平行封焊设备样机1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/8.jpg?raw=true" alt="自动平行封焊设备样机2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/3.png?raw=true" alt="自动平行封焊设备调试现场"></div>
+                <div class="carousel" id="carousel2">
+                    <div class="carousel-inner">
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/12.png?raw=true" alt="自动平行封焊设备结构图1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/13.png?raw=true" alt="自动平行封焊设备结构图2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/14.jpg?raw=true" alt="自动平行封焊设备样机1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/8.jpg?raw=true" alt="自动平行封焊设备样机2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/3.png?raw=true" alt="自动平行封焊设备调试现场" onclick="openModal(this.src)"></div>
+                    </div>
+                    <button class="carousel-prev" onclick="prevSlide(2)">&#10094;</button>
+                    <button class="carousel-next" onclick="nextSlide(2)">&#10095;</button>
+                    <div class="carousel-indicators">
+                        <span class="indicator active" onclick="currentSlide(2, 0)"></span>
+                        <span class="indicator" onclick="currentSlide(2, 1)"></span>
+                        <span class="indicator" onclick="currentSlide(2, 2)"></span>
+                        <span class="indicator" onclick="currentSlide(2, 3)"></span>
+                        <span class="indicator" onclick="currentSlide(2, 4)"></span>
                     </div>
                 </div>
             </div>
 
-            <!-- 项目3：拓竹/创想系列3D打印机配件开发 -->
+            <!-- 项目3：拓竹/创想系列3D打印机配件开发 - 21张全图 -->
             <div class="project-card">
                 <h2>拓竹/创想系列3D打印机配件开发</h2>
                 <span class="period">2022.02-2023.07 | 结构工程师</span>
                 <div class="content">
-                    <p><strong>主要负责：</strong>拓竹、创想主流机型适配配件研发与升级，完成全流程结构设计、图纸发放、样品验证及量产导入。</p>
+                    <p><strong>主要负责：</strong>拓竹、创想主流机型适配配件研发与升级，完成全流程结构设计、图纸发放、样品验证及量产导入，全程把控产品精度与稳定性。</p>
                     <p><strong>业绩：</strong>完成20+款专用配件开发，全部顺利量产销售，适配精度高，持续供应市场与售后替换。</p>
                 </div>
-                <!-- 媒体展示区：3D打印机配件图片（21张） -->
-                <div class="media-section">
-                    <h3>项目资料</h3>
-                    <div class="media-container">
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20191220_192113.jpg?raw=true" alt="3D打印机配件设计图1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230531_171806.jpg?raw=true" alt="3D打印机配件设计图2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230531_171920.jpg?raw=true" alt="3D打印机配件样机1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230531_171925.jpg?raw=true" alt="3D打印机配件样机2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230705_154132.jpg?raw=true" alt="3D打印机配件加工件1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230705_154137.jpg?raw=true" alt="3D打印机配件加工件2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/wx_camera_1571995391880.jpg?raw=true" alt="3D打印机配件装配图1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20220623_164241.jpg?raw=true" alt="3D打印机配件装配图2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20220623_170120.jpg?raw=true" alt="3D打印机配件测试1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20220705_145658.jpg?raw=true" alt="3D打印机配件测试2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230417_163803.jpg?raw=true" alt="3D打印机配件量产件1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20200411_113946.jpg?raw=true" alt="3D打印机配件量产件2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230308_181746.jpg?raw=true" alt="3D打印机配件适配测试1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230308_181853.jpg?raw=true" alt="3D打印机配件适配测试2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230308_182052.jpg?raw=true" alt="3D打印机配件适配测试3"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230330_163800.jpg?raw=true" alt="3D打印机配件老化测试1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230404_164929.jpg?raw=true" alt="3D打印机配件老化测试2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230404_164941.jpg?raw=true" alt="3D打印机配件精度检测1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230416_161031.jpg?raw=true" alt="3D打印机配件精度检测2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230416_173314.jpg?raw=true" alt="3D打印机配件现场交付1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230513_183019.jpg?raw=true" alt="3D打印机配件现场交付2"></div>
+                <div class="carousel" id="carousel3">
+                    <div class="carousel-inner">
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20191220_192113.jpg?raw=true" alt="3D打印机配件设计图1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230531_171806.jpg?raw=true" alt="3D打印机配件设计图2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230531_171920.jpg?raw=true" alt="3D打印机配件样机1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230531_171925.jpg?raw=true" alt="3D打印机配件样机2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230705_154132.jpg?raw=true" alt="3D打印机配件加工件1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230705_154137.jpg?raw=true" alt="3D打印机配件加工件2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/wx_camera_1571995391880.jpg?raw=true" alt="3D打印机配件装配图1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20220623_164241.jpg?raw=true" alt="3D打印机配件装配图2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20220623_170120.jpg?raw=true" alt="3D打印机配件测试1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20220705_145658.jpg?raw=true" alt="3D打印机配件测试2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230417_163803.jpg?raw=true" alt="3D打印机配件量产件1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20200411_113946.jpg?raw=true" alt="3D打印机配件量产件2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230308_181746.jpg?raw=true" alt="3D打印机配件适配测试1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230308_181853.jpg?raw=true" alt="3D打印机配件适配测试2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230308_182052.jpg?raw=true" alt="3D打印机配件适配测试3" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230330_163800.jpg?raw=true" alt="3D打印机配件老化测试1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230404_164929.jpg?raw=true" alt="3D打印机配件老化测试2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230404_164941.jpg?raw=true" alt="3D打印机配件精度检测1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230416_161031.jpg?raw=true" alt="3D打印机配件精度检测2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230416_173314.jpg?raw=true" alt="3D打印机配件现场交付1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230513_183019.jpg?raw=true" alt="3D打印机配件现场交付2" onclick="openModal(this.src)"></div>
+                    </div>
+                    <button class="carousel-prev" onclick="prevSlide(3)">&#10094;</button>
+                    <button class="carousel-next" onclick="nextSlide(3)">&#10095;</button>
+                    <div class="carousel-indicators">
+                        <span class="indicator active" onclick="currentSlide(3, 0)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 1)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 2)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 3)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 4)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 5)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 6)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 7)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 8)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 9)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 10)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 11)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 12)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 13)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 14)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 15)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 16)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 17)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 18)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 19)"></span>
+                        <span class="indicator" onclick="currentSlide(3, 20)"></span>
                     </div>
                 </div>
             </div>
 
-            <!-- 项目4：模块老化设备/半导体芯片COS老化设备 -->
+            <!-- 项目4：模块老化设备/半导体芯片COS老化设备 - 34张全图 -->
             <div class="project-card">
                 <h2>模块老化设备/半导体芯片COS老化设备</h2>
                 <span class="period">2023.07-2025.07 | 机械/结构工程师</span>
                 <div class="content">
-                    <p><strong>核心负责：</strong>半导体老化/测试设备结构设计、夹具方案、整机布局、3D建模/2D出图、样机调试；兼容多款产品，实现温度/水流量控制。</p>
-                    <p><strong>业绩：</strong>设备批量投产无售后，交付即用，研发效率高。</p>
+                    <p><strong>核心负责：</strong>半导体老化/测试设备结构设计、夹具方案、整机布局；3D建模/2D出图、样机调试，实现温度/水流量精准控制，兼容多款产品。</p>
+                    <p><strong>业绩：</strong>设备批量投产无售后，交付即用，研发效率高，全程满足客户核心需求指标。</p>
                 </div>
-                <!-- 媒体展示区：老化设备图片（34张） -->
-                <div class="media-section">
-                    <h3>项目资料</h3>
-                    <div class="media-container">
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/5.png?raw=true" alt="半导体老化设备整体设计图"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20250606_190224.jpg?raw=true" alt="半导体老化设备样机实拍1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/1.jpg?raw=true" alt="半导体老化设备样机实拍2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193746.jpg?raw=true" alt="半导体老化设备内部结构1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/12.png?raw=true" alt="半导体老化设备内部结构2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/13.png?raw=true" alt="半导体老化设备温控模块设计图"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/14.jpg?raw=true" alt="半导体老化设备水流量控制模块"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/8.jpg?raw=true" alt="半导体老化设备夹具设计图1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/10.png?raw=true" alt="半导体老化设备夹具设计图2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/9.png?raw=true" alt="半导体老化设备夹具样机"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/15.png?raw=true" alt="半导体老化设备装配流程1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/16.jpg?raw=true" alt="半导体老化设备装配流程2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/17.png?raw=true" alt="半导体老化设备调试现场1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/18.jpg?raw=true" alt="半导体老化设备调试现场2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193719.jpg?raw=true" alt="半导体老化设备精度检测1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193724.jpg?raw=true" alt="半导体老化设备精度检测2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193733.jpg?raw=true" alt="半导体老化设备老化测试1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193746.jpg?raw=true" alt="半导体老化设备老化测试2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240711_183706.jpg?raw=true" alt="半导体老化设备批量生产1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/19.png?raw=true" alt="半导体老化设备批量生产2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240711_183738.jpg?raw=true" alt="半导体老化设备现场交付1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/20.png?raw=true" alt="半导体老化设备现场交付2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/7.png?raw=true" alt="半导体老化设备售后巡检1"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240705_103558.jpg?raw=true" alt="半导体老化设备售后巡检2"></div>
-                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20250304_151038.jpg?raw=true" alt="半导体老化设备客户使用现场"></div>
+                <div class="carousel" id="carousel4">
+                    <div class="carousel-inner">
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/5.png?raw=true" alt="半导体老化设备整体设计图" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20250606_190224.jpg?raw=true" alt="半导体老化设备样机实拍1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/1.jpg?raw=true" alt="半导体老化设备样机实拍2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193746.jpg?raw=true" alt="半导体老化设备内部结构1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/12.png?raw=true" alt="半导体老化设备内部结构2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/13.png?raw=true" alt="半导体老化设备温控模块设计图" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/14.jpg?raw=true" alt="半导体老化设备水流量控制模块" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/8.jpg?raw=true" alt="半导体老化设备夹具设计图1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/10.png?raw=true" alt="半导体老化设备夹具设计图2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/9.png?raw=true" alt="半导体老化设备夹具样机" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/15.png?raw=true" alt="半导体老化设备装配流程1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/16.jpg?raw=true" alt="半导体老化设备装配流程2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/17.png?raw=true" alt="半导体老化设备调试现场1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/18.jpg?raw=true" alt="半导体老化设备调试现场2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193719.jpg?raw=true" alt="半导体老化设备精度检测1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193724.jpg?raw=true" alt="半导体老化设备精度检测2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193733.jpg?raw=true" alt="半导体老化设备老化测试1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193746.jpg?raw=true" alt="半导体老化设备老化测试2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240711_183706.jpg?raw=true" alt="半导体老化设备批量生产1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/19.png?raw=true" alt="半导体老化设备批量生产2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240711_183738.jpg?raw=true" alt="半导体老化设备现场交付1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/20.png?raw=true" alt="半导体老化设备现场交付2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/7.png?raw=true" alt="半导体老化设备售后巡检1" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240705_103558.jpg?raw=true" alt="半导体老化设备售后巡检2" onclick="openModal(this.src)"></div>
+                        <div class="carousel-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20250304_151038.jpg?raw=true" alt="半导体老化设备客户使用现场" onclick="openModal(this.src)"></div>
+                    </div>
+                    <button class="carousel-prev" onclick="prevSlide(4)">&#10094;</button>
+                    <button class="carousel-next" onclick="nextSlide(4)">&#10095;</button>
+                    <div class="carousel-indicators">
+                        <span class="indicator active" onclick="currentSlide(4, 0)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 1)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 2)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 3)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 4)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 5)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 6)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 7)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 8)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 9)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 10)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 11)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 12)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 13)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 14)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 15)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 16)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 17)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 18)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 19)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 20)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 21)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 22)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 23)"></span>
+                        <span class="indicator" onclick="currentSlide(4, 24)"></span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- 图片放大模态框 -->
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img id="modalImage" src="">
+    </div>
+
+    <!-- 轮播图核心JS：自动播放+切换+暂停+放大 -->
+    <script>
+        // 轮播图状态管理：存储每个轮播的当前索引和自动播放定时器
+        const carousels = {
+            1: { index: 0, autoPlay: null },
+            2: { index: 0, autoPlay: null },
+            3: { index: 0, autoPlay: null },
+            4: { index: 0, autoPlay: null }
+        };
+
+        // 初始化所有轮播图的自动播放（3秒切换）
+        Object.keys(carousels).forEach(carouselId => {
+            startAutoPlay(Number(carouselId));
+        });
+
+        // 下一张图片
+        function nextSlide(carouselId) {
+            const carousel = carousels[carouselId];
+            const inner = document.querySelector(`#carousel${carouselId} .carousel-inner`);
+            const items = inner.querySelectorAll('.carousel-item');
+            carousel.index = (carousel.index + 1) % items.length;
+            updateCarousel(carouselId);
+        }
+
+        // 上一张图片
+        function prevSlide(carouselId) {
+            const carousel = carousels[carouselId];
+            const inner = document.querySelector(`#carousel${carouselId} .carousel-inner`);
+            const items = inner.querySelectorAll('.carousel-item');
+            carousel.index = (carousel.index - 1 + items.length) % items.length;
+            updateCarousel(carouselId);
+        }
+
+        // 跳转到指定索引的图片
+        function currentSlide(carouselId, slideIndex) {
+            carousels[carouselId].index = slideIndex;
+            updateCarousel(carouselId);
+        }
+
+        // 更新轮播图显示和指示器状态
+        function updateCarousel(carouselId) {
+            const carousel = carousels[carouselId];
+            const inner = document.querySelector(`#carousel${carouselId} .carousel-inner`);
+            const indicators = document.querySelectorAll(`#carousel${carouselId} .indicator`);
+            
+            // 切换图片
+            inner.style.transform = `translateX(-${carousel.index * 100}%)`;
+            // 更新指示器
+            indicators.forEach((indicator, idx) => {
+                indicator.classList.toggle('active', idx === carousel.index);
+            });
+            // 重置自动播放（手动切换后重新计时）
+            resetAutoPlay(carouselId);
+        }
+
+        // 开始自动播放
+        function startAutoPlay(carouselId) {
+            carousels[carouselId].autoPlay = setInterval(() => {
+                nextSlide(carouselId);
+            }, 3000);
+        }
+
+        // 重置自动播放定时器
+        function resetAutoPlay(carouselId) {
+            clearInterval(carousels[carouselId].autoPlay);
+            startAutoPlay(carouselId);
+        }
+
+        // 鼠标悬停轮播图时暂停播放，离开后恢复
+        document.querySelectorAll('.carousel').forEach(carousel => {
+            const carouselId = Number(carousel.id.replace('carousel', ''));
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(carousels[carouselId].autoPlay);
+            });
+            carousel.addEventListener('mouseleave', () => {
+                startAutoPlay(carouselId);
+            });
+        });
+
+        // 打开图片放大模态框
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            modalImg.src = imgSrc;
+            // 暂停所有轮播图播放
+            Object.keys(carousels).forEach(id => clearInterval(carousels[Number(id)].autoPlay));
+        }
+
+        // 关闭图片放大模态框
+        function closeModal(e) {
+            // 防止点击图片本身关闭模态框
+            if (e && e.target.tagName === 'IMG') return;
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            // 恢复所有轮播图自动播放
+            Object.keys(carousels).forEach(id => startAutoPlay(Number(id)));
+        }
+
+        // 按ESC键关闭模态框
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
 </body>
 </html>
