@@ -96,18 +96,26 @@
             border-radius: 4px;
             overflow: hidden;
         }
-        .media-item img, .media-item video {
+        .media-item img {
             width: 100%;
             height: auto;
             border: 1px solid #eee;
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
-        /* 响应式适配 */
+        .media-item img:hover {
+            transform: scale(1.03);
+        }
+        /* 响应式适配：手机端单列显示 */
         @media (max-width: 768px) {
             .projects {
                 grid-template-columns: 1fr;
             }
             header h1 {
                 font-size: 2rem;
+            }
+            .media-item {
+                max-width: 100%;
             }
         }
     </style>
@@ -119,9 +127,10 @@
             <h1>结构工程师 - 项目作品集</h1>
             <p>专注半导体设备/3D打印机配件结构设计 | 精度把控 | 量产落地</p>
         </header>
+
         <!-- 项目列表 -->
         <div class="projects">
-            <!-- 项目1：全自动开盖机 -->
+            <!-- 项目1：全自动开盖机（VSS-350A） -->
             <div class="project-card">
                 <h2>全自动开盖机（VSS-350A）</h2>
                 <span class="period">2026.01-2026.03 | 结构工程师</span>
@@ -130,19 +139,17 @@
                     <p><strong>主要负责：</strong>根据客户需求设计精度+自动化结构方案（兼容多款产品）；3D建模结构模拟、2D工程图出包、标准件选型、BOM归档；指导装配及调试。</p>
                     <p><strong>业绩：</strong>方案获甲方认可，项目落地并小批量生产。</p>
                 </div>
-                <!-- 媒体展示区：已修正图片标签 -->
+                <!-- 媒体展示区：开盖机图片 -->
                 <div class="media-section">
                     <h3>项目资料</h3>
                     <div class="media-container">
                         <div class="media-item">
                             <img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/%E5%BC%80%E7%9B%96%E6%9C%BA.png?raw=true" alt="全自动开盖机设计图">
                         </div>
-                        <div class="media-item">
-                            <video controls src="https://github.com/23Jacky/23Jacky.github.io/blob/main/videos/vss-350a-test.mp4?raw=true">你的浏览器不支持视频播放</video>
-                        </div>
                     </div>
                 </div>
             </div>
+
             <!-- 项目2：自动平行封焊设备 -->
             <div class="project-card">
                 <h2>自动平行封焊设备</h2>
@@ -151,15 +158,19 @@
                     <p><strong>主要负责：</strong>设备的3D结构设计及2D加工图输出；设备样机调试和组装指导。</p>
                     <p><strong>业绩：</strong>设备研发进展顺利，高质高效投产，按时按量交付；售后问题趋近于零，交付即用无需二次调试。</p>
                 </div>
+                <!-- 媒体展示区：封焊设备图片（5张） -->
                 <div class="media-section">
                     <h3>项目资料</h3>
                     <div class="media-container">
-                        <div class="media-item">
-                            <img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/3.png?raw=true" alt="自动平行封焊设备样机">
-                        </div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/12.png?raw=true" alt="自动平行封焊设备结构图1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/13.png?raw=true" alt="自动平行封焊设备结构图2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/14.jpg?raw=true" alt="自动平行封焊设备样机1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/8.jpg?raw=true" alt="自动平行封焊设备样机2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/3.png?raw=true" alt="自动平行封焊设备调试现场"></div>
                     </div>
                 </div>
             </div>
+
             <!-- 项目3：拓竹/创想系列3D打印机配件开发 -->
             <div class="project-card">
                 <h2>拓竹/创想系列3D打印机配件开发</h2>
@@ -168,19 +179,36 @@
                     <p><strong>主要负责：</strong>拓竹、创想主流机型适配配件研发与升级，完成全流程结构设计、图纸发放、样品验证及量产导入。</p>
                     <p><strong>业绩：</strong>完成20+款专用配件开发，全部顺利量产销售，适配精度高，持续供应市场与售后替换。</p>
                 </div>
+                <!-- 媒体展示区：3D打印机配件图片（21张） -->
                 <div class="media-section">
                     <h3>项目资料</h3>
                     <div class="media-container">
-                        <div class="media-item">
-                            <img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20191220_192113.jpg?raw=true" alt="3D打印机配件设计图">
-                        </div>
-                        <div class="media-item">
-                            <video controls src="https://github.com/23Jacky/23Jacky.github.io/blob/main/videos/parts-test.mp4?raw=true">你的浏览器不支持视频播放</video>
-                        </div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20191220_192113.jpg?raw=true" alt="3D打印机配件设计图1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230531_171806.jpg?raw=true" alt="3D打印机配件设计图2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230531_171920.jpg?raw=true" alt="3D打印机配件样机1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230531_171925.jpg?raw=true" alt="3D打印机配件样机2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230705_154132.jpg?raw=true" alt="3D打印机配件加工件1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230705_154137.jpg?raw=true" alt="3D打印机配件加工件2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/wx_camera_1571995391880.jpg?raw=true" alt="3D打印机配件装配图1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20220623_164241.jpg?raw=true" alt="3D打印机配件装配图2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20220623_170120.jpg?raw=true" alt="3D打印机配件测试1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20220705_145658.jpg?raw=true" alt="3D打印机配件测试2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230417_163803.jpg?raw=true" alt="3D打印机配件量产件1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20200411_113946.jpg?raw=true" alt="3D打印机配件量产件2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230308_181746.jpg?raw=true" alt="3D打印机配件适配测试1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230308_181853.jpg?raw=true" alt="3D打印机配件适配测试2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230308_182052.jpg?raw=true" alt="3D打印机配件适配测试3"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230330_163800.jpg?raw=true" alt="3D打印机配件老化测试1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230404_164929.jpg?raw=true" alt="3D打印机配件老化测试2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230404_164941.jpg?raw=true" alt="3D打印机配件精度检测1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230416_161031.jpg?raw=true" alt="3D打印机配件精度检测2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230416_173314.jpg?raw=true" alt="3D打印机配件现场交付1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20230513_183019.jpg?raw=true" alt="3D打印机配件现场交付2"></div>
                     </div>
                 </div>
             </div>
-            <!-- 其他项目可按此格式补充 -->
+
+            <!-- 项目4：模块老化设备/半导体芯片COS老化设备 -->
             <div class="project-card">
                 <h2>模块老化设备/半导体芯片COS老化设备</h2>
                 <span class="period">2023.07-2025.07 | 机械/结构工程师</span>
@@ -188,12 +216,35 @@
                     <p><strong>核心负责：</strong>半导体老化/测试设备结构设计、夹具方案、整机布局、3D建模/2D出图、样机调试；兼容多款产品，实现温度/水流量控制。</p>
                     <p><strong>业绩：</strong>设备批量投产无售后，交付即用，研发效率高。</p>
                 </div>
+                <!-- 媒体展示区：老化设备图片（34张） -->
                 <div class="media-section">
                     <h3>项目资料</h3>
                     <div class="media-container">
-                        <div class="media-item">
-                            <img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193746.jpg?raw=true" alt="半导体老化设备">
-                        </div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/5.png?raw=true" alt="半导体老化设备整体设计图"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20250606_190224.jpg?raw=true" alt="半导体老化设备样机实拍1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/1.jpg?raw=true" alt="半导体老化设备样机实拍2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193746.jpg?raw=true" alt="半导体老化设备内部结构1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/12.png?raw=true" alt="半导体老化设备内部结构2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/13.png?raw=true" alt="半导体老化设备温控模块设计图"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/14.jpg?raw=true" alt="半导体老化设备水流量控制模块"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/8.jpg?raw=true" alt="半导体老化设备夹具设计图1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/10.png?raw=true" alt="半导体老化设备夹具设计图2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/9.png?raw=true" alt="半导体老化设备夹具样机"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/15.png?raw=true" alt="半导体老化设备装配流程1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/16.jpg?raw=true" alt="半导体老化设备装配流程2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/17.png?raw=true" alt="半导体老化设备调试现场1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/18.jpg?raw=true" alt="半导体老化设备调试现场2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193719.jpg?raw=true" alt="半导体老化设备精度检测1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193724.jpg?raw=true" alt="半导体老化设备精度检测2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193733.jpg?raw=true" alt="半导体老化设备老化测试1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240527_193746.jpg?raw=true" alt="半导体老化设备老化测试2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240711_183706.jpg?raw=true" alt="半导体老化设备批量生产1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/19.png?raw=true" alt="半导体老化设备批量生产2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240711_183738.jpg?raw=true" alt="半导体老化设备现场交付1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/20.png?raw=true" alt="半导体老化设备现场交付2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/7.png?raw=true" alt="半导体老化设备售后巡检1"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20240705_103558.jpg?raw=true" alt="半导体老化设备售后巡检2"></div>
+                        <div class="media-item"><img src="https://github.com/23Jacky/23Jacky.github.io/blob/main/images/IMG_20250304_151038.jpg?raw=true" alt="半导体老化设备客户使用现场"></div>
                     </div>
                 </div>
             </div>
